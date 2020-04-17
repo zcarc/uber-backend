@@ -1,1 +1,7 @@
 #1.3 A word on @types
+
+#1.8 Graphql To Typescript
+
+    ./src/types/graph.d.ts
+        d.ts 파일은 타입스크립트가 type 정의 파일이라고 인식함
+        Definition의 d
