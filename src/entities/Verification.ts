@@ -7,7 +7,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
+import User from "./User";
 
 const PHONE = "PHONE";
 const EMAIL = "EMAIL";
@@ -31,6 +33,9 @@ class Verification extends BaseEntity {
   @CreateDateColumn() createdAt: string;
 
   @UpdateDateColumn() updatedAt: string;
+
+  @ManyToOne(type => User, user => user.verifications)
+  user: User;
 
   @BeforeInsert()
   createKey(): void {
