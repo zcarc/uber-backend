@@ -1,5 +1,5 @@
-import { GraphQLServer } from "graphql-yoga";
 import cros from 'cors';
+import { GraphQLServer } from "graphql-yoga";
 import helmet from 'helmet';
 import logger from 'morgan';
 import schema from './schema';
