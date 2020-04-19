@@ -1,5 +1,5 @@
-import User from "src/entities/User";
 import { Resolvers } from "src/types/resolvers";
+import User from "../../../entities/User";
 import {
   EmailSignInMutationArgs,
   EmailSignInResponse,
