@@ -11,14 +11,26 @@ const resolvers: Resolvers = {
       _,
       args: StartPhoneVerificationMutationArgs
     ): Promise<StartPhoneVerificationResponse> => {
+
       const { phoneNumber } = args;
+
       try {
+
         const exisitingVerification = await Verification.findOne({
           payload: phoneNumber,
         });
+
         if (exisitingVerification) {
           exisitingVerification.remove();
         }
+
+        const newVerification = await Verification.create({
+          payload: phoneNumber,
+          target: "PHONE",
+        }).save();
+        
+        // to do send SMS
+
       } catch (error) {
         return {
           ok: false,
