@@ -19,6 +19,14 @@ class App {
     this.app.express.use(logger("dev"));
     this.app.express.use(helmet());
   };
+
+  // X-JWT: 원하는대로 지어도 상관없음 (백엔드, 프론트엔드 둘 다 생성해야함)
+  private jwt = async(req, res, next): Promise<void> => {
+    const token = req.get("X-JWT");
+    if(token) {
+    }
+    next();
+  }
 }
 
 export default new App().app;
