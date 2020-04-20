@@ -1,9 +1,9 @@
+import Verification from "../../../entities/Verification";
 import {
   StartPhoneVerificationMutationArgs,
   StartPhoneVerificationResponse,
-} from "src/types/graph";
-import { Resolvers } from "src/types/resolvers";
-import Verification from "../../../entities/Verification";
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
 import { sendVerificationSMS } from "../../../utils/sendSMS";
 
 const resolvers: Resolvers = {
@@ -27,8 +27,6 @@ const resolvers: Resolvers = {
           payload: phoneNumber,
           target: "PHONE",
         }).save();
-
-        console.log(newVerification);
 
         // send SMS
         await sendVerificationSMS(newVerification.payload, newVerification.key);
