@@ -8,3 +8,6 @@
 
 #1.34 Introduction to Twilio
     set up
+
+#1.43 Testing Authentication Resolvers
+    test authentication
