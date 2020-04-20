@@ -83,7 +83,7 @@ type GetMyProfileResponse {
 }
 
 type Query {
-  getMyProfile: GetMyProfileResponse!
+  GetMyProfile: GetMyProfileResponse!
 }
 
 type User {
