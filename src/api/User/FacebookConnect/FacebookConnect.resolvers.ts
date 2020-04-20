@@ -20,7 +20,7 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token
+            token,
           };
         }
       } catch (error) {
@@ -36,14 +36,13 @@ const resolvers: Resolvers = {
           profilePhoto: `http:graph.facebook.com/${fbId}/picture?type=square`,
         }).save();
 
-        const token = createJWT(newUser.id)
+        const token = createJWT(newUser.id);
 
         return {
           ok: true,
           error: null,
-          token
+          token,
         };
-        
       } catch (error) {
         return {
           ok: false,

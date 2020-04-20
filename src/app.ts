@@ -1,4 +1,5 @@
 import cros from 'cors';
+import { NextFunction, Response } from "express";
 import { GraphQLServer } from "graphql-yoga";
 import helmet from 'helmet';
 import logger from 'morgan';
@@ -10,7 +11,12 @@ class App {
 
   constructor() {
     this.app = new GraphQLServer({
-      schema
+      schema,
+      context: req => {
+        return {
+          req: req.request,
+        };
+      },
     });
     this.middleware();
   }
@@ -23,14 +29,18 @@ class App {
   };
 
   // X-JWT: 원하는대로 지어도 상관없음 (백엔드, 프론트엔드 둘 다 생성해야함)
-  private jwt = async(req, res, next): Promise<void> => {
+  private jwt = async (req, res: Response, next: NextFunction): Promise<void> => {
     const token = req.get("X-JWT");
-    if(token) {
+    if (token) {
       const user = await decodeJWT(token);
-      console.log('user: ', user);
+      if (user) {
+        req.user = user;
+      } else {
+        req.user = undefined;
+      }
     }
     next();
-  }
+  };
 }
 
 export default new App().app;
