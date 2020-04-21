@@ -1,9 +1,10 @@
 import User from "../../../entities/User";
 import {
   UpdateMyProfileMutationArgs,
-  UpdateMyProfileResponse
+  UpdateMyProfileResponse,
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
+import cleanNullArgs from "../../../utils/cleanNullArg";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
@@ -15,27 +16,27 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<UpdateMyProfileResponse> => {
         const user: User = req.user;
-        const notNull = {};
-        Object.keys(args).forEach(key => {
-          if (args[key] !== null) {
-            notNull[key] = args[key];
-          }
-        });
+        const notNull: any = cleanNullArgs(args);
+        if (notNull.password !== null) {
+          user.password = notNull.password;
+          user.save();
+          delete notNull.password;
+        }
         try {
           await User.update({ id: user.id }, { ...notNull });
           return {
             ok: true,
-            error: null
+            error: null,
           };
         } catch (error) {
           return {
             ok: false,
-            error: error.message
+            error: error.message,
           };
         }
       }
-    )
-  }
+    ),
+  },
 };
 
 export default resolvers;
