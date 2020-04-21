@@ -9,10 +9,11 @@ const resolvers: Resolvers = {
   Mutation: {
     RequestEmailVerification: privateResolver(
       async (_, __, { req }): Promise<RequestEmailVerificationResponse> => {
-          
+
         const user: User = req.user;
 
-        if (user.email) {
+        // 회원가입은 됐고 인증이 되어있지 않다면
+        if (user.email && !user.verifiedEmail) {
           try {
             const oldVerification = await Verification.findOne({
               payload: user.email,
