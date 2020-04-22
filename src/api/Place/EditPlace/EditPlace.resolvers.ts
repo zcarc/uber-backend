@@ -18,7 +18,15 @@ const resolvers: Resolvers = {
           const place = await Place.findOne({ id: args.placeId });
           if (place) {
             if (place.userId === user.id) {
-              const notNull = cleanNullArgs(args);
+              const notNull: any = cleanNullArgs(args);
+
+              // update할 때 notNull에는 args의 null을 필터한 key가 들어있고
+              // 실제 Place에는 placeId가 없다
+              // 그래서 매개변수로서 필수인 placeId는 notNull에서 무조건 삭제되게 해야한다.
+              if(notNull.placeId !== null) {
+                  delete notNull.placeId;
+              }
+              
               await Place.update({ id: args.placeId }, { ...notNull });
               return {
                 ok: true,
