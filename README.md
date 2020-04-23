@@ -44,5 +44,5 @@ Server for the Uber Clone. GraphQL, Typescript, NodeJS
 - [x] Subscribe to Chat Room Messages
 
 ## Code Challenge
-- [ ] Get Ride History
-- [ ] See Ride Detail
+- [x] Get Ride History
+- [x] See Ride Detail
