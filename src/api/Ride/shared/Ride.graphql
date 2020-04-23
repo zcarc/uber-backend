@@ -13,6 +13,7 @@ type Ride {
   driverId: Int
   driver: User!
   passenger: User!
+  chat: Chat
   passengerId: Int!
   createdAt: String!
   updatedAt: String
