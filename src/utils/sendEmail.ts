@@ -22,8 +22,8 @@ const sendEmail = (subject: string, html: string) => {
 
 export const sendVerificationEmail = (fullName: string, key: string) => {
 
-  const emailSubject = `Hello! ${fullName}, please verify your email`;
-  const emailBody = `Verify your email by clicking <a href="http://nuber.com/verification/${key}/">here</a>`;
+  const emailSubject = `안녕하세요! ${fullName}님 이메일을 인증해주세요. 감사합니다!!`;
+  const emailBody = `클릭해서 인증하세요.<a href="https://uber-client-hs.herokuapp.com/${key}/">https://uber-client-hs.herokuapp.com/${key}</a>`;
 
   return sendEmail(emailSubject, emailBody);
 };
